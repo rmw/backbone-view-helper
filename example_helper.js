@@ -1,0 +1,1 @@
+../../ge-app/public/javascripts/views/contacts/helper.js

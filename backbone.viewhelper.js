@@ -1,0 +1,1 @@
+../../ge-app/public/javascripts/backbone.viewhelper.js
