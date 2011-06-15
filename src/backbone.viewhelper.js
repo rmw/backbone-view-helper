@@ -74,7 +74,10 @@
             var attr = this.options[attrName];
             var exempts = this.options.prefixExempt[attrName];
             for(var val in attr) {
-                if(_.include(exempts, val)) return;
+                if (_.include(exempts, val)) {
+					this[attrName][val] = attr[val];
+					return;
+				}
                 var orig = attr[val];
 				this[attrName][val] = func(val, orig);
             }
@@ -109,7 +112,7 @@
         },
         this._configure = function(options) {
            options = options || {};
-           this.options = $.extend({}, this.defaults, options);
+           this.options = $.extend(true, {}, this.defaults, options);
         }
 
 

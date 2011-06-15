@@ -68,10 +68,44 @@ describe("backbone viewhelper", function() {
            });
         });
 
-       it("should have a string url", function() {
-          expect(this.helper2.url('index')).toEqual('twos');
-       });
-
+       describe("css", function() {
+		    it("should have prefixed show css", function() { expect(this.helper2.css.show).toEqual('two_show'); });
+            it("should have prefixed edit css", function() { expect(this.helper2.css.edit).toEqual('two_edit'); });
+            it("should have prefixed index css", function() { expect(this.helper2.css.index).toEqual('two_list'); });
+            it("should have prefixed 'new' css", function() { expect(this.helper2.css['new']).toEqual('two_new'); });
+            it("should have prefixed form css", function() { expect(this.helper2.css.form).toEqual('two_form'); });
+            it("should have prefixed destroy css", function() { expect(this.helper2.css.destroy).toEqual('two_delete'); });
+		});
+	   
+	   describe("id", function() {
+			it('should have a prefixed attribute', function() { expect(this.helper2.id.attribute).toEqual('two-id'); });
+			it("should have a prefixed tag id", function() { expect(this.helper2.id.tag(1)).toEqual('two_1'); });
+		});
 
     });
+	
+	describe("a view helper with options", function() {
+		beforeEach(function() {
+			this.helper3 = new Backbone.ViewHelper({
+			   prefix : 'three',
+			   prefixExempt : {
+			       css: ['list']
+			   },
+			   css : {
+			       list : 'threes'
+			   },
+			   header : null
+			});
+		});
+		
+		describe("css", function() {
+		    it("should have prefixed show css", function() { expect(this.helper3.css.show).toEqual('three_show'); });
+            it("should have prefixed edit css", function() { expect(this.helper3.css.edit).toEqual('three_edit'); });
+            it("should have prefixed index css", function() { expect(this.helper3.css.index).toEqual('three_list'); });
+            it("should have prefixed 'new' css", function() { expect(this.helper3.css['new']).toEqual('three_new'); });
+            it("should have prefixed form css", function() { expect(this.helper3.css.form).toEqual('three_form'); });
+            it("should have prefixed destroy css", function() { expect(this.helper3.css.destroy).toEqual('three_delete'); });
+			it("should have a prefixed list css", function() { expect(this.helper3.css.list).toEqual('threes'); });
+		});
+	});
 });
